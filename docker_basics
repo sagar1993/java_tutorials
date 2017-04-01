@@ -1,0 +1,70 @@
+allows to run multiple operating systems on one os
+
+docker run <imagename>
+docker search <imagename>
+docker pull <image>:<tag>
+docker images
+
+docker run -it <imagename:tag>
+-it : povides terminal
+
+docker ps
+docker ps -a
+
+docker restart <containerid>
+keep docker container running in background
+
+
+docker attach <containerid>
+
+
+docker run -it --rm -v <host dir>:<container dir> <image: tag> command
+connects directory 
+
+-u <userid:groupid> 
+to specify user
+
+-d 
+detached mode
+
+-p -<host port>:<container port> <ngnix>
+map container port to host port.
+
+-e <container> = <local>
+environment variables
+
+
+compile code using containers
+docker run -it --rm -v $(pwd):/go -u 1000:1000 golang go build -o helloworld.out
+
+helloworld.out will be present at working directory
+
+creating volumes
+-v <container dir>
+docker run -v /var/lib/docker --name=<name> -d <image> <command>
+mapped /var/lib/docker/(vfs or volumes)/<dir>
+
+
+docker inspect <name>
+
+--volumes-from <docker datastore name>
+
+
+link
+connects ports between two containers
+--link <datastore name>:<alias>
+
+
+
+
+Docker command to run tensorflow
+
+docker run -it -p 8888:8888 gcr.io/tensorflow/tensorflow
+
+
+Docker udacity tensorflow
+
+docker run -p 8888:8888 --name tensorflow-udacity -it b.gcr.io/tensorflow-udacity/assignments:0.5.0
+
+
+
