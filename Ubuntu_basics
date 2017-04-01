@@ -58,4 +58,36 @@
 # crontab 
 	to add scripts to cron
 	
+	
+Upstart scripts have to be placed at /etc/init/, ending with .conf.
+
+Basically they require 2 sessions: one to indicate when to start, and another with the command to exec.
+
+The easiest script to start with your sample is:
+
+# myprogram.conf
+start on filesystem
+exec /usr/bin/java -jar /path_to/program
+Of course, created as root under /etc/init/myprogram.conf.
+
+If your script requires more than one command line, use the script section:
+
+# myprogram.conf
+start on filesystem
+script
+    /usr/bin/java -jar /path_to/program
+    echo "Another command"
+end script
+To enable bash completion for your service, add a symlink into /etc/init.d folder:
+
+sudo ln -s /etc/init/myprogram.conf /etc/init.d/myprogram
+Then try start and stop it:
+
+sudo service myprogram start
+Of course, if you read the upstart cookbook, you can create pre-start/post-start and pre-stop/post-stop commands to be executed.
+
+And, additionally, I read you want to check if a process is running. Check this question and maybe use the pre-start section.	
+	
+	
+	
 
