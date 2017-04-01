@@ -1,0 +1,89 @@
+import pandas as pd
+
+Load csv into Dataframes
+	dataframe = pd.read_csv(url)
+
+describe info about dataframe mean, count %
+	dataframe.describe()
+
+diamensions
+	dataframe.shape
+
+
+Assignment with condition (where clause)
+	dataframe["New"][dataframe["Old"] > 100 ] = 1
+
+
+Decision tree
+
+import numpy as np
+from sklearn import tree
+
+filling missing values
+	train["Age"] = train["Age"].fillna(train["Age"].median())
+
+extract features - as numpy array
+	test_features = test[[___, ___, ___, ___]].values
+
+create decision tree
+	my_tree_one = tree.DecisionTreeClassifier()
+fit model
+	
+# Create the target and features numpy arrays: target, features_one
+
+	target = train["Survived"].values
+
+	features_one = train[["Pclass", "Sex", "Age", "Fare"]].values
+
+
+# Fit your first decision tree: my_tree_one
+
+	my_tree_one = tree.DecisionTreeClassifier()
+
+	my_tree_one = my_tree_one.fit(features_one, target)
+	
+result of decision tree  feature_importances_ 
+	my_tree_one.feature_importances_	
+
+accuracy score
+	my_tree_one.score(features_one, target)
+
+predicting data
+	my_prediction = my_tree_one.predict(test_features)
+
+
+
+Submitting solution
+
+# Create a data frame with two columns: PassengerId & Survived. Survived contains your predictions
+
+	PassengerId =np.array(test["PassengerId"]).astype(int)
+
+	my_solution = pd.DataFrame(my_prediction, PassengerId, columns = ["Survived"])
+
+	print(my_solution)
+
+# Write your solution to a csv file with the name my_solution.csv
+
+	my_solution.to_csv("my_solution_one.csv", index_label = ["PassengerId"])
+
+
+
+
+Randon forest
+
+Random Forest technique handles the overfitting problem you faced with decision trees. It grows multiple (very deep) classification trees using the training set. At the time of prediction, each tree is used to come up with a prediction and every outcome is counted as a vote
+
+n_estimators needs to be set when using the RandomForestClassifier() class. This argument allows you to set the number of trees you wish to plant and average over.
+
+
+from sklearn.ensemble import RandomForestClassifier
+
+
+forest = RandomForestClassifier(max_depth = 10, min_samples_split=2, n_estimators = 100, random_state = 1)
+
+my_forest = forest.fit(features_forest, target)
+
+pred_forest = my_forest.predict(test_features)
+
+
