@@ -2,7 +2,7 @@
 Simple use cases for java API and libraries.
 
 
-BeanUtils
+# BeanUtils
 Direct-easy access to java classes that follows java beanstructure by providing wrapper around java.lang.reflect and java.beans.
 
 public class Person{
@@ -32,17 +32,18 @@ public static void main(String [] args){
 }
 
 
-JavaBean
+# JavaBean
+
 Encapsulates many components, easy maintenance
 It is a class which follows following conventions
 no arg constructor
 getter setter method
 Serializable
 
-Serialization 
+# Serialization 
 Process of converting object into byte-stream. Travel object’s state via network marshelling.
 
-Java.io.serialization
+# Java.io.serialization
 Marker interface, String and Wrapper classes are by default serializable
 ObjectOutPutStream class
 Class used to write object to outputstream
@@ -50,7 +51,8 @@ ObjectInputStream class
 Class to get object from in stream
 
 
-Transient keyword
+# Transient keyword
+
 Used when we dont want to serialize certain data member from class.
 
 Class Person implements Serializable{
@@ -62,7 +64,7 @@ Class Person implements Serializable{
 }
 
 
-Commons Chain
+# Commons Chain
 
 Commons chain is library used to run chain of commands
 The basic units are
@@ -73,12 +75,12 @@ Filter
 Catalog
 Context
 
-Commons Compress
+# Commons Compress
 Api for working with compressed files
 
 
 
-Commons Configuration
+# Commons Configuration
 https://commons.apache.org/proper/commons-configuration/userguide/howto_properties.html
 
 The apache commons configuration provide api to read and write constant data from configuration files.
@@ -105,13 +107,13 @@ Save configurations
 Make use of configuration builders
 
 
-Commons CSV
+# Commons CSV
 
 https://commons.apache.org/proper/commons-csv/user-guide.html
 
 To work with csv files
 
-Commons Exec
+# Commons Exec
 
 To execute commands via java
 
@@ -121,7 +123,7 @@ DefaultExecutor executor = new DefaultExecutor();
 executor.execute(cmd);
 
 
-Commons IO
+# Commons IO
 
 IOUtils
 Method to read write and copy works with InputStream OutputStream
@@ -129,7 +131,7 @@ Method to read write and copy works with InputStream OutputStream
 FileUtils
 FileSystemUtils
 
-Commons CLI
+# Commons CLI
 
 Used to parse command line options
 
@@ -142,31 +144,31 @@ boolean value = cmd.hasOption(“t”);
 String value = cmd.getOptionValue(“t”)
 
 
-Commons Collection
+# Commons Collection
 
 Utility classes for java collections
 
 
-Commons Text
+# Commons Text
 
-Commons Lang
+# Commons Lang
 
 Provides helper utility for java.lang.API
 
 org.apache.commons.lang3.StrinUtils
 All methods are static
 
-Commons Imaging
+# Commons Imaging
 
 Library to play with image data.
 https://commons.apache.org/proper/commons-imaging/sampleusage.html
 
 
-Commons Validator
+# Commons Validator
 To validate xml
 
 
-Commons Email
+# Commons Email
 
 To send email 
 EmailAttachment attachement = new EmailAttachment();
