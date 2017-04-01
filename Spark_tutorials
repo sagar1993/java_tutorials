@@ -1,0 +1,139 @@
+tasks to learn
+
+1. creating and saving to hdfs
+2. spark different libraries
+3. sbt files
+4. nc, ubuntu command line utils
+
+spark streamin with twitter live
+
+
+Installation
+
+needs jdk 
+scala
+spark jar 
+
+
+File strcture
+	<file>.sbt
+	src/main/scala/*.scala
+
+Running 
+sbt package
+/usr/local/spark/bin/spark-submit --class "SimpleApp" --master local[3] target/scala-2.11/simple-project_2.11-1.0.jar 
+
+/usr/local/spark/bin/spark-submit --class "org.apache.spark.examples.streaming.NetworkWordCount" --master local[3] target/scala-2.11/simple-project_2.11-1.0.jar localhost 9999
+
+
+Spark variables
+
+* Broadcast Variables
+	sent to each cluster
+	read only variables on clusters
+	sc.broadcast(v)
+
+* Accumulated
+	variables generally numeric type
+	variables that are added
+	clusters can just add value to it can not read
+	sc.accumulator(v)
+	only driver program can read its value
+
+RDD
+	resilient distributed datastructure
+
+	Data Structure for spark partiotioned accross nodes and runs in parallel
+
+	it can be a parallelized exisitng data structure in driver program or external dataset - file, Hadoop, Hbase
+
+	enhance performance of spark due to its in memory structure which was drawback of map-reduce 
+
+	1. parallelized collections
+
+	val data = Array(1, 2, 3, 4, 5)
+	val distData = sc.parallelize(data)
+
+	2. external data source - can be hadoop, network file system, hbase
+
+	val file = sc.textFile(<path>)
+	
+	sequenceFile - file containing key value pair
+	
+	for hadoop
+	sc.hadoopRDD
+
+	saveAsObjectFile - to save RDD in simple format consiting serialized java objects
+
+
+Operations on RDD
+
+1 Transformations
+	run on clusters to perform specific operation
+	returns pointers to new RDD
+	
+
+2 Actions
+	returns values to driver
+
+Collect all values at driver from executor nodes
+collect()
+
+Cachcing
+	rdd.cache()
+
+
+Initializing spark
+
+	1. SparkContext object which tells spark how to access clusters
+	2. To initialize 1 SparkConf object is required which holds project specific information
+
+
+	import org.apache.spark.SparkContext
+	import org.apache.spark.SparkConf
+
+	val conf = new SparkConf().setAppName(appName).setMaster(master)
+	new SparkContext(conf)
+
+spark divides RDD into cluster to executors each executor will receive set of variable and instruction to perform called as closure	
+
+
+
+** Spark Streaming
+
+library dependancies
+
+	libraryDependancies += "spark-streaming_2.11"
+
+initialize stream context
+
+	val conf = SparkConf().setAppName('<name>').setMaster("local[2]")
+	val ssc = SparkStreamingContext(conf, Seconds(1))
+
+	streaming context from spark context
+		val ssc = new StreamingContext(sc, Seconds(1))
+
+creates Sockets DStream
+
+	val lines = ssc.socketTextStream("localhost", 9999)
+
+
+Discretized Stream or DStream
+
+basic abstraction of spark streaming 
+it is represented by series of RDD
+
+any operation on DStream results in operations on RDD's
+
+every input Dstream is associated with a Receiver which stores data in memory
+
+sources
+	basic - sources directly available in SparkContext, socket file
+	advanced - kafka, flume
+
+
+** Spark SQL
+
+spark sql operations works on dataFrame
+
+rdd.toDf()
