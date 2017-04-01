@@ -1,0 +1,61 @@
+# /etc/rc.local
+	init runs rc scripts when run level of system changes (boot, reboot, shutdown)
+	runs after normal system services are started
+
+# creating a service (upstart)
+	/etc/init/myservice.conf
+
+	#myservice.conf
+	script
+		echo "commands"
+	script end
+
+	link service to enable bash calling
+
+	sudo ln -s /etc/init/myservice.conf /etc/init.d/myservice
+
+	sudo service myservice start
+
+# creating a service (systemd)
+	/etc/systemd/system/my_service.service
+
+	[Unit]
+	Description=My Miscellaneous Service
+
+	[Service]
+	Type=simple
+	User=born_2_code
+	WorkingDirectory=/home/born_2_code
+	ExecStart=<location>
+	Restart=on-abort
+
+	[Install]
+	WantedBy=multi-user.target
+
+
+	systemctl start
+	systemctl stop
+
+	Restarting/reloading
+	systemctl daemon-reload # Run if .service file has changed
+	systemctl restart
+
+
+# alias
+	alias fun='rm -rf *'
+
+# awk
+	find replace text
+
+	ls | awk '{print $2}'
+
+# bg
+	send job to background
+
+# cron 
+	to run scripts files in interval
+
+# crontab 
+	to add scripts to cron
+	
+
