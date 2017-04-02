@@ -58,6 +58,9 @@
 # crontab 
 	to add scripts to cron
 	
+# image to pdf
+
+	convert *.jpg file.pdf
 	
 Upstart scripts have to be placed at /etc/init/, ending with .conf.
 
